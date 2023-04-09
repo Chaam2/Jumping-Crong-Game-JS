@@ -2,32 +2,39 @@
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth - 100;
-canvas.heigth = window.innerHeight - 100;
+canvas.width = 800;
+canvas.height = 200;
 
 //오브젝트 정의
+const chick = new Image
+chick.src = "img/chick.png"
+
 let dino = {
   x : 100,
-  y : 100,
-  width : 50,
-  height : 50,
+  y : 140,
+  width : 40,
+  height : 40,
   draw(){
-    ctx.fillStyle = 'lightgreen';
-    ctx.fillRect(this.x,this.y,this.width,this.height);
+    ctx.fillStyle = 'yellow';
+    //ctx.fillRect(this.x,this.y,this.width,this.height);
+    ctx.drawImage(chick,this.x-5,this.y-5,this.width+10,this.height+10);
   }
 }
 dino.draw();
 
+const tree = new Image
+tree.src = "img/tree.png"
 class Cactus{
   constructor(){
     this.x = canvas.width
-    this.y = 100
-    this.width = 50
-    this.height = 50
+    this.y = 140
+    this.width = 40
+    this.height = 40
   }
   draw(){
-    ctx.fillStyle = 'green';
-    ctx.fillRect(this.x,this.y,this.width,this.height);
+    ctx.fillStyle = 'lightgreen';
+    //ctx.fillRect(this.x,this.y,this.width,this.height);
+    ctx.drawImage(tree,this.x-5,this.y-5,this.width+10,this.height+10);
   }
 }
 
@@ -78,11 +85,11 @@ function animation(){
     jumpTimer++
     dino.y -=4 
   }
-  if(jumpTimer>30){
+  if(jumpTimer>26){
     isJumping = false
   }
-  if(!isJumping && dino.y<100){
-    dino.y +=2
+  if(!isJumping && dino.y<140){
+    dino.y +=3
     jumpTimer = 0
   }
 }
