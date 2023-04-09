@@ -10,7 +10,7 @@ let dino = {
   width : 50,
   height : 50,
   draw(){
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'lightgreen';
     ctx.fillRect(this.x,this.y,this.width,this.height);
   }
 }
@@ -24,27 +24,48 @@ class Cactus{
     this.height = 50
   }
   draw(){
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = 'green';
     ctx.fillRect(this.x,this.y,this.width,this.height);
   }
 }
 
+
 let cactusArr = []
-let timer = 0
+let cactusTimer = 0
+let isJumping = false
+let jumpTimer = 0
+document.addEventListener('keydown',(e)=>{
+  if(e.code === "Space"){
+    isJumping = true
+  }
+})
+
 function animation(){
   requestAnimationFrame(animation)
   ctx.clearRect(0,0,canvas.width,canvas.height)
   
-  timer++
-  if(timer % 120 ===0){
+  cactusTimer++
+  if(cactusTimer % 120 ===0){
     let cactus = new Cactus()
     cactusArr.push(cactus)
   }
   cactusArr.forEach((cactus)=>{
-    cactus.x--
+    cactus.x-=3
     cactus.draw()
   })
 
   dino.draw()
+  if(isJumping){
+    jumpTimer++
+    dino.y -=3
+  }
+  if(jumpTimer>30){
+    isJumping = false
+  }
+  if(!isJumping && dino.y<100){
+    dino.y +=2
+    jumpTimer = 0
+  }
 }
 animation()
+
