@@ -29,6 +29,22 @@ class Cactus{
   }
 }
 
-const cactus = new Cactus
-cactus.draw()
+let cactusArr = []
+let timer = 0
+function animation(){
+  requestAnimationFrame(animation)
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+  
+  timer++
+  if(timer % 120 ===0){
+    let cactus = new Cactus()
+    cactusArr.push(cactus)
+  }
+  cactusArr.forEach((cactus)=>{
+    cactus.x--
+    cactus.draw()
+  })
 
+  dino.draw()
+}
+animation()
