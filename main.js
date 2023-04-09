@@ -5,7 +5,7 @@ canvas.width = window.innerWidth - 100;
 canvas.heigth = window.innerHeight - 100;
 
 let dino = {
-  x : 10,
+  x : 100,
   y : 100,
   width : 50,
   height : 50,
@@ -43,13 +43,16 @@ document.addEventListener('keydown',(e)=>{
 function animation(){
   requestAnimationFrame(animation)
   ctx.clearRect(0,0,canvas.width,canvas.height)
-  
+  ctx.strokeRect(0,0,canvas.width,canvas.height)
   cactusTimer++
   if(cactusTimer % 120 ===0){
     let cactus = new Cactus()
     cactusArr.push(cactus)
   }
-  cactusArr.forEach((cactus)=>{
+  cactusArr.forEach((cactus,index,arr)=>{
+    if(cactus.x<1){
+      arr.splice(index,1)
+    }
     cactus.x-=3
     cactus.draw()
   })
