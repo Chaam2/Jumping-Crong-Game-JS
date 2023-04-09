@@ -18,7 +18,7 @@ dino.draw();
 
 class Cactus{
   constructor(){
-    this.x = 300
+    this.x = canvas.width
     this.y = 100
     this.width = 50
     this.height = 50
